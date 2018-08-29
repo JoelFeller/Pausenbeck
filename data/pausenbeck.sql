@@ -1,0 +1,125 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Erstellungszeit: 29. Aug 2018 um 16:17
+-- Server-Version: 10.1.34-MariaDB
+-- PHP-Version: 7.2.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Datenbank: `pausenbeck`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `angebot`
+--
+
+CREATE TABLE `angebot` (
+  `aid` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `anzahl` int(11) DEFAULT NULL,
+  `preis` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `bestellungen`
+--
+
+CREATE TABLE `bestellungen` (
+  `bid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `aid` int(11) NOT NULL,
+  `anzahl` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `users`
+--
+
+CREATE TABLE `users` (
+  `uid` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `passwort` varchar(500) DEFAULT NULL,
+  `admin` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `angebot`
+--
+ALTER TABLE `angebot`
+  ADD PRIMARY KEY (`aid`);
+
+--
+-- Indizes für die Tabelle `bestellungen`
+--
+ALTER TABLE `bestellungen`
+  ADD PRIMARY KEY (`bid`),
+  ADD KEY `uid` (`uid`),
+  ADD KEY `aid` (`aid`);
+
+--
+-- Indizes für die Tabelle `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`uid`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `angebot`
+--
+ALTER TABLE `angebot`
+  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `bestellungen`
+--
+ALTER TABLE `bestellungen`
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `users`
+--
+ALTER TABLE `users`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints der exportierten Tabellen
+--
+
+--
+-- Constraints der Tabelle `bestellungen`
+--
+ALTER TABLE `bestellungen`
+  ADD CONSTRAINT `aid` FOREIGN KEY (`aid`) REFERENCES `angebot` (`aid`),
+  ADD CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
