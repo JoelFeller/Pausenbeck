@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?= $title ?> | Bbc MVC</title>
+    <title><?= $title ?> | BWD Pausenbeck</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -29,13 +29,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Bbc MVC</a>
+          <a class="navbar-brand" href="/">BWD Pausenbeck</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/user">Benutzer</a></li>
-            <li><a href="/user/create">Benutzer erstellen</a></li>
+            <li><a href="/waren/angebot">Unser Angebot</a></li>
+            <li><a href="/waren/warenkorb">Warenkorb</a></li>
+            <li><a href="/user/login">Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
