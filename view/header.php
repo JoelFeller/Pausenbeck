@@ -20,6 +20,7 @@
     <![endif]-->
   </head>
   <body>
+  <?php if(!isset($_SESSION))session_start(); ?>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -33,16 +34,18 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/user">Benutzer</a></li>
-            <li><a href="/waren/angebot">Unser Angebot</a></li>
-            <li><a href="/waren/warenkorb">Warenkorb</a></li>
-            <li><a href="/user/login">Login</a></li>
+              <li><a href="/">Home</a></li>
+              <?php if(isset($_SESSION['email'])) : ?>
+                  <li><a href="/waren/angebot">Unser Angebot</a></li>
+                  <li><a href="/waren/warenkorb">Warenkorb</a></li>
+                  <li><a href="/user/logout">Logout</a></li>
+              <?php endif; ?>
+              <?php if(!isset($_SESSION['email'])) : ?>
+                  <li><a href="/user/login">Login</a></li>
+              <?php endif; ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
     <div class="container">
-
     <h1><?= $heading ?></h1>

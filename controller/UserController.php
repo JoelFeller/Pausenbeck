@@ -21,42 +21,20 @@ class UserController
     {
         $error = [];
         $view = new View('user_create');
-        $view->title = 'Create user';
-        $view->heading = 'Create user';
+        $view->title = 'Registrieren';
+        $view->heading = 'Registrieren';
         $view->errors = $error;
         $view->display();
     }
     public function doCreate()
     {
         if ($_POST['send']) {
+            $username = $_POST['firstName'].' '.$_POST['lastName'];
             $password = $_POST['password'];
-            $password2 = $_POST['password2'];
-            if($password == $password2){
-                $error = [];
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $userRepository = new UserRepository();
-                if ($userRepository->checkName($username) < 1) {
-                    $userRepository->create($username, $password);
-                    header("Location: /user/login");
-                } else {
-                    $error["wrong"] = "Es existiert bereits ein Benutzer mit dieser E-Mail Adresse";
-                }
-                $view = new View('user_create');
-                $view->title = 'Create user';
-                $view->heading = 'Create user';
-                $view->errors = $error;
-                $view->display();
-            }
-            else {
-                $error = [];
-                $view = new View('user_create');
-                $view->title = 'Create user';
-                $view->heading = 'Create user';
-                $view->errors = $error;
-                $view->display();
-                echo '<p>Die Passwörter stimmen nicht miteinander überein';
-            }
+            $email = $_POST['email'];
+            $userRepository = new UserRepository();
+            $userRepository->create($username,$email, $password);
+            header("Location: /user/login");
         }
     }
     public function delete()
@@ -70,13 +48,13 @@ class UserController
     public function dologin()
     {
         if (isset($_POST['submit'])) {
-            $username = $_POST['username'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
-
             $userRepository = new UserRepository();
-            $loginErfolgreich = $userRepository->login($username, $password);
+            $loginErfolgreich = $userRepository->login($email, $password);
             if($loginErfolgreich) {
-                $_SESSION['username'] = $username;
+                session_start();
+                $_SESSION['email'] = $email;
                 header('Location: /');
             }
             else
@@ -94,9 +72,9 @@ class UserController
         $view->heading = 'Login';
         $view->display();
     }
-    public function doLogout()
+    public function logout()
     {
-        session_destroy();
+        session_start();
         session_unset();
         header('Location: /');
     }
