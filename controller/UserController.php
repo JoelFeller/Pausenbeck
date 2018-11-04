@@ -55,6 +55,7 @@ class UserController
             if($loginErfolgreich) {
                 session_start();
                 $_SESSION['email'] = $email;
+                $_SESSION['id'] = $userRepository->getId($email);
                 header('Location: /');
             }
             else

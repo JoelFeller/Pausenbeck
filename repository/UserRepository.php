@@ -43,6 +43,7 @@ class UserRepository extends Repository
 
         return $statement->insert_id;
     }
+
     public function login($email, $password)
     {
         $query = "SELECT passwort FROM $this->tableName WHERE email=?";
@@ -61,6 +62,18 @@ class UserRepository extends Repository
         } else {
             return false;
         }
+    }
 
+    public function getId($email){
+        $query = "SELECT uid FROM $this->tableName WHERE email=?";
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('s', $email);
+        $statement->execute();
+        $result = $statement->get_result();
+        $row = $result->fetch_array();
+        foreach ($row as $r)
+        {
+            return $r;
+        }
     }
 }
