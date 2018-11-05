@@ -56,7 +56,7 @@ class UserRepository extends Repository
         {
             $result = $r;
         }
-        if($result == $password)
+        if($result == sha1($password))
         {
             return true;
         } else {
