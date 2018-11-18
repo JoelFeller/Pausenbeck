@@ -45,7 +45,7 @@ class WarenRepository extends Repository
             }
             $query="INSERT INTO bestellungen(uid, aid, anzahl, code) VALUES (?,?,?,?)";
             $statement = ConnectionHandler::getConnection()->prepare($query);
-            $statement->bind_param('iiis', $user->uid, $aid, $anzahl[$counter],$code);
+            $statement->bind_param('iiis', $user->uid, $aid, $anzahl[$counter], $code);
             $statement->execute();
             $counter++;
         }
