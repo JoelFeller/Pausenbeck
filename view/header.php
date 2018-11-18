@@ -40,6 +40,7 @@
                   <?php if(isset($_SESSION['bestellteAnzahl'])): ?>
                     <li><a href="/waren/warenkorb">Warenkorb</a></li>
                   <?php endif; ?>
+                  <li><a href="/bestellung/uebersicht">Bestellung</a></li>
                   <li><a href="/user/logout">Logout</a></li>
               <?php endif; ?>
               <?php if(!isset($_SESSION['email'])) : ?>

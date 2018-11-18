@@ -5,7 +5,7 @@
             <?php foreach ($angebote as $angebot): ?>
                 <?php if ($angebot->anzahl != 0): ?>
                     <?php if ($_SESSION['bestellteAnzahl'][$counter] != 0): ?>
-                        <div class="col-md-4 projekte-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
+                        <div class="col-md-4 projekte-post blog-large wow fadeInLeft">
                             <article>
                                 <br>
                                 <header class="entry-header">
