@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 18. Nov 2018 um 14:26
+-- Erstellungszeit: 18. Nov 2018 um 23:13
 -- Server-Version: 10.1.37-MariaDB
 -- PHP-Version: 7.2.12
 
@@ -41,10 +41,10 @@ CREATE TABLE `angebot` (
 
 INSERT INTO `angebot` (`aid`, `name`, `anzahl`, `preis`) VALUES
 (1, 'Butter Brötchen', 2, '1.50'),
-(2, 'Schinken Sandwich', 5, '4.50'),
+(2, 'Schinken Sandwich', 2, '4.50'),
 (3, 'Schoggi Gipfeli', 3, '2.50'),
 (4, 'Vegi Sandwich', 2, '6.50'),
-(5, 'Bauern Brötli', 2, '2.00');
+(5, 'Bauern Brötli', 0, '2.00');
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ ALTER TABLE `angebot`
 -- AUTO_INCREMENT für Tabelle `bestellungen`
 --
 ALTER TABLE `bestellungen`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
