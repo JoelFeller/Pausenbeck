@@ -36,8 +36,10 @@
           <ul class="nav navbar-nav">
               <li><a href="/">Home</a></li>
               <?php if(isset($_SESSION['email'])) : ?>
-                  <li><a href="/waren/angebot">Unser Angebot</a></li>
-                  <li><a href="/waren/warenkorb">Warenkorb</a></li>
+                  <li><a href="/waren/angebote">Unser Angebot</a></li>
+                  <?php if(isset($_SESSION['bestellteAnzahl'])): ?>
+                    <li><a href="/waren/warenkorb">Warenkorb</a></li>
+                  <?php endif; ?>
                   <li><a href="/user/logout">Logout</a></li>
               <?php endif; ?>
               <?php if(!isset($_SESSION['email'])) : ?>

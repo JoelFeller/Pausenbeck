@@ -4,7 +4,7 @@ require_once '../repository/UserRepository.php';
 
 class WarenController
 {
-    public function angebot()
+    public function angebote()
     {
         session_start();
         $warenRepository = new WarenRepository();
@@ -19,9 +19,14 @@ class WarenController
 
     public function warenkorb()
     {
+        session_start();
+        $warenRepository = new WarenRepository();
+        $userRepository = new UserRepository();
         $view = new View('warenkorb_index');
         $view->title = 'Warenkorb';
         $view->heading = 'Warenkorb';
+        $view->user = $userRepository->readById($_SESSION['id']);
+        $view->angebote = $warenRepository->readAll();
         $view->display();
     }
 
@@ -32,7 +37,7 @@ class WarenController
         $anzahl = $_GET['anz'];
         $anzahl++;
         $warenRepository->doRaise($aid, $anzahl);
-        header("location: angebot");
+        header("location: angebote");
     }
 
     public function dropStock()
@@ -42,6 +47,37 @@ class WarenController
         $anzahl = $_GET['anz'];
         $anzahl--;
         $warenRepository->doDrop($aid, $anzahl);
-        header("location: angebot");
+        header("location: angebote");
+    }
+    public function raiseBestellt(){
+        session_start();
+        $position = $_GET['pos'];
+        $_SESSION['bestellteAnzahl'][$position] = $_SESSION['bestellteAnzahl'][$position]+1;
+        header("location: angebote");
+    }
+
+    public function dropBestellt() {
+        session_start();
+        $position = $_GET['pos'];
+        $_SESSION['bestellteAnzahl'][$position] = $_SESSION['bestellteAnzahl'][$position]-1;
+        header("location: angebote");
+    }
+
+    public function order() {
+        session_start();
+        $warenRepository = new WarenRepository();
+        $userRepository = new UserRepository();
+        $user = $userRepository->readById($_SESSION['id']);
+        $counter = 0;
+        foreach($_SESSION['bestellteAnzahl'] as $anz){
+            if($anz == 0){
+                unset($_SESSION['bestellteAnzahl'][$counter]);
+                unset($_SESSION['bestellteWare'][$counter]);
+            }
+            $counter++;
+        }
+        $warenRepository->doOrder($user);
+        unset($_SESSION['init']);
+        header("location: angebote");
     }
 }
